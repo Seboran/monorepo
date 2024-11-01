@@ -9,8 +9,7 @@
     "ghcr.io/devcontainers/features/python:1": { "version": "3.12" },
     "ghcr.io/joshuanianji/devcontainer-features/mount-pnpm-store": {},
     "ghcr.io/nils-geistmann/devcontainers-features/zsh": {},
-    "ghcr.io/audacioustux/devcontainers/bun": {},
-    "ghcr.io/devcontainers/features/desktop-lite": {}
+    "ghcr.io/devcontainers/features/rust": {}
   },
 
   // Features to add to the dev container. More info: https://containers.dev/features.
@@ -34,8 +33,7 @@
   },
 
   // Use 'postCreateCommand' to run commands after the container is created.
-  "postStartCommand": "pip install -r requirements.txt && pnpm i",
-  "postAttachCommand": "pnpm dev --host",
+  "postStartCommand": "pnpm i",
   "customizations": {
     "vscode": {
       "extensions": [
