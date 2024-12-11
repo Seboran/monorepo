@@ -1,15 +1,14 @@
-import type { Config, Context } from '@netlify/edge-functions'
 import {
   ENABLE_CHAT as ENABLE_CHAT_ENV,
   MISTRAL_AGENT_ID_KEY,
   MISTRAL_API_ENDPOINT_KEY,
   MISTRAL_API_KEY,
-} from '../../utils/environment-variables.ts'
+} from '../../../utils/environment-variables'
 
-const apiKey = Netlify.env.get(MISTRAL_API_KEY)
-const ENABLE_CHAT = Netlify.env.get(ENABLE_CHAT_ENV)
-const MISTRAL_API_ENDPOINT = Netlify.env.get(MISTRAL_API_ENDPOINT_KEY)
-const MISTRAL_AGENT_ID = Netlify.env.get(MISTRAL_AGENT_ID_KEY)
+const apiKey = import.meta.env[MISTRAL_API_KEY]
+const ENABLE_CHAT = import.meta.env[ENABLE_CHAT_ENV]
+const MISTRAL_API_ENDPOINT = import.meta.env[MISTRAL_API_ENDPOINT_KEY]
+const MISTRAL_AGENT_ID = import.meta.env[MISTRAL_AGENT_ID_KEY]
 
 interface ChatCompletionChunk {
   id: string
@@ -25,7 +24,7 @@ interface ChatCompletionChunk {
   }[]
 }
 
-export default async (request: Request, _context: Context) => {
+export const POST = async (request: Request) => {
   /**
    * Gestion des erreurs de configuration
    */
@@ -65,10 +64,6 @@ export default async (request: Request, _context: Context) => {
       'Content-Type': 'text/event-stream',
     },
   })
-}
-
-export const config: Config = {
-  path: '/api/chat',
 }
 
 /**
